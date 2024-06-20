@@ -89,6 +89,24 @@ $(function(){
 
 
 
+    $(window).on('scroll', function() {
+        var windscroll = $(window).scrollTop();
+        console.log("Scroll position:", windscroll);
+    
+        $('.page-section').each(function(i) {
+            console.log("Section:", $(this).attr('id'), "Top:", $(this).position().top);
+            if ($(this).position().top <= windscroll + 1 && $(this).position().top + $(this).outerHeight() > windscroll) {
+                $('.scroll-nav .scroll-to.active').removeClass('active');
+                $('.scroll-nav .scroll-to').eq(i).addClass('active');
+            }
+        });
+    
+        if (windscroll === 0) {
+            $('.scroll-nav .scroll-to.active').removeClass('active');
+            $('.scroll-nav .scroll-to:first').addClass('active');
+        }
+    }).scroll();
+    
 
 
     if ($('.testimonial-slider').length) {
